@@ -1,8 +1,8 @@
-package com.picpaysimplificado.services;
+package com.banksimulator.services;
 
-import com.picpaysimplificado.domain.user.User;
-import com.picpaysimplificado.domain.user.UserType;
-import com.picpaysimplificado.repositories.UserRepository;
+import com.banksimulator.domain.user.User;
+import com.banksimulator.domain.user.UserType;
+import com.banksimulator.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

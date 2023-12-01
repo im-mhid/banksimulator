@@ -1,9 +1,9 @@
-package com.picpaysimplificado.services;
+package com.banksimulator.services;
 
-import com.picpaysimplificado.domain.transaction.Transaction;
-import com.picpaysimplificado.domain.user.User;
-import com.picpaysimplificado.dtos.TransactionDTO;
-import com.picpaysimplificado.repositories.TransactionRepository;
+import com.banksimulator.domain.transaction.Transaction;
+import com.banksimulator.domain.user.User;
+import com.banksimulator.dtos.TransactionDTO;
+import com.banksimulator.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,10 +37,17 @@ public class TransactionService {
         }
 
         Transaction newTransaction = new Transaction();
-        newTransaction.setAmount(transaction.getAmount());
+        newTransaction.setAmount(transaction.value());
         newTransaction.setSender(sender);
         newTransaction.setReceiver(receiver);
-        newTransaction.setTimeStamp(LocalDateTime.now());
+        newTransaction.setTimestamp(LocalDateTime.now());
+
+        sender.setBalance(sender.getBalance().subtract(transaction.value()));
+        receiver.setBalance(receiver.getBalance().add(transaction.value()));
+
+        this.repository.save(newTransaction);
+        this.userService.saveUser(sender);
+        this.userService.saveUser(receiver);
     }
 
     public boolean authorizeTransaction(User sender, BigDecimal value) {

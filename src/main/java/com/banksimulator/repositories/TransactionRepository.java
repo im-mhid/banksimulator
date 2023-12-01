@@ -1,6 +1,6 @@
-package com.picpaysimplificado.repositories;
+package com.banksimulator.repositories;
 
-import com.picpaysimplificado.domain.transaction.Transaction;
+import com.banksimulator.domain.transaction.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
